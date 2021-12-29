@@ -8,6 +8,8 @@ namespace Repositories.IRepositories
     {
         IProductsRepository Products { get; }
         IOrdersRepository Orders { get; }
+
+        ICartItemsRepository CartItems { get; }
         void Save();
     }
 }

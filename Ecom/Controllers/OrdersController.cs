@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace Ecom.Controllers
 {
     [ApiController]
-    [Route("api/products")]
+    [Route("api/orders")]
 
     public class OrdersController : ControllerBase
     {
@@ -43,8 +43,9 @@ namespace Ecom.Controllers
         {
 
             _logger.LogInformation("Products Controller -> products");
-            int userId = Convert.ToInt32(User.Identity.Name.ToString());
-            var list = await ordersService.GetAllOrders(userId);
+            //int userId = Convert.ToInt32(User.Identity.Name.ToString());
+            string val= "";
+            var list = await ordersService.GetAllOrders(val);
             return new JsonResult(list);
 
 
@@ -55,13 +56,15 @@ namespace Ecom.Controllers
         [Authorize]
         public IActionResult AddProduct([FromBody] CreateOrderParams order)
         {
-            int userId = Convert.ToInt32(User.Identity.Name.ToString());
+            //int userId = Convert.ToInt32(User.Identity.Name.ToString());
+            ClaimsPrincipal currentUser = this.User;
+            string currentUserID = currentUser.FindFirst("Id").Value;
             if (order.CartItems == null)
             {
                 return BadRequest(new { message = "cart items cannot be empty" });
             }
 
-            order.UserId = userId;
+            order.UserId = currentUserID;
             ordersService.CreateOrder(order);
             return Ok(new { message = "Product Added successfully" });
         }

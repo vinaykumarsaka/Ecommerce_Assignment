@@ -11,8 +11,20 @@ namespace Repositories.Repositories
         private AppDbContext _repoContext;
         private IProductsRepository _products;
         private IOrdersRepository _orders;
+        private ICartItemsRepository _cartItems;
 
 
+        public ICartItemsRepository CartItems
+        {
+            get
+            {
+                if (_cartItems == null)
+                {
+                    _cartItems = new CartItemsRepository(_repoContext);
+                }
+                return _cartItems;
+            }
+        }
 
         public IProductsRepository Products
         {

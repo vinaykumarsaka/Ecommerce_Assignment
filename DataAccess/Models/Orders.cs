@@ -10,13 +10,12 @@ namespace Ecom.DataAccess.Models
     {
         [Key]
         public int Id { get; set; }
-        public int AspnetUserId { get; set; }
+        public string AspnetUserId { get; set; }
 
         [Required]
         public string Address { get; set; }
         [Required]
-        public int Total { get; set; }
+        public int? TotalAmount { get; set; }
         public int EstimateDelivery { get; set; }
-        public virtual IEnumerable<CartItems> CartItems { get; set; }
     }
 }

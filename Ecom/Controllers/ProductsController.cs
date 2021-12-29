@@ -37,7 +37,7 @@ namespace Ecom.Controllers
 
         [HttpGet]
         [Route("")]
-        [Authorize]
+      
         public async Task<IActionResult> Products()
         {
 

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Models;
+using Newtonsoft.Json;
 
 namespace Contracts.Services
 {
@@ -25,16 +26,23 @@ namespace Contracts.Services
             {
                 AspnetUserId = order.UserId,
                 Address = order.Address,
-                Total = order.Total,
-                EstimateDelivery = order.EstDelivery,
-                CartItems = order.CartItems
+                TotalAmount = order.Total,
+                EstimateDelivery = order.EstDelivery
             };
 
             _repoWrapper.Orders.Create(newOrder);
             _repoWrapper.Save();
+            var cartItemsList= JsonConvert.DeserializeObject<List<CartItems>>(order.CartItems);
+            foreach(var item in cartItemsList)
+            {
+                item.OrderID = newOrder.Id;
+                _repoWrapper.CartItems.Create(item);
+                _repoWrapper.Save();
+            }
+            //foreach()
         }
 
-        public async Task<List<Orders>> GetAllOrders(int userId)
+        public async Task<List<Orders>> GetAllOrders(string userId)
         {
             return await _repoWrapper.Orders.FindByCondition(x => x.AspnetUserId == userId).ToListAsync();
         }
