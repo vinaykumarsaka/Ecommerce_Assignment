@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Ecom.Migrations
+namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -35,6 +35,9 @@ namespace Ecom.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("CartItems");
@@ -57,7 +60,8 @@ namespace Ecom.Migrations
                     b.Property<int>("EstimateDelivery")
                         .HasColumnType("int");
 
-                    b.Property<int>("Total")
+                    b.Property<int?>("TotalAmount")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");

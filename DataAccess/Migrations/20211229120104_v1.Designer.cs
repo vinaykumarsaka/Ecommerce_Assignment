@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Ecom.Migrations
+namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211223094421_miv5")]
-    partial class miv5
+    [Migration("20211229120104_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,17 +31,16 @@ namespace Ecom.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderID")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
                 });
@@ -57,13 +56,14 @@ namespace Ecom.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AspnetUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("AspnetUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EstimateDelivery")
                         .HasColumnType("int");
 
-                    b.Property<int>("Total")
+                    b.Property<int?>("TotalAmount")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -84,8 +84,9 @@ namespace Ecom.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ModelNum")
-                        .HasColumnType("int");
+                    b.Property<string>("ModelNum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -294,23 +295,6 @@ namespace Ecom.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Ecom.DataAccess.Models.CartItems", b =>
-                {
-                    b.HasOne("Ecom.DataAccess.Models.Orders", "Order")
-                        .WithMany("CartItems")
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("Ecom.DataAccess.Models.Product", "Product")
-                        .WithMany("CartItems")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -360,16 +344,6 @@ namespace Ecom.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Ecom.DataAccess.Models.Orders", b =>
-                {
-                    b.Navigation("CartItems");
-                });
-
-            modelBuilder.Entity("Ecom.DataAccess.Models.Product", b =>
-                {
-                    b.Navigation("CartItems");
                 });
 #pragma warning restore 612, 618
         }
