@@ -9,12 +9,7 @@
     padding: 0 10%;
   }
   
-  .logo {
-    font-family: 'Lato', sans-serif;
-    font-size: 2rem;
-    color: white;
-    margin: 0;
-  }
+  
   
   .header ul {
     list-style: none;
@@ -40,7 +35,7 @@
     border: 1px solid white;
     color: white;
     font-weight: bold;
-    padding: 0.5rem 1.5rem;
+    /* padding: 0.5rem 1.5rem; */
     border-radius: 6px;
     cursor: pointer;
   }
@@ -53,10 +48,10 @@
     background-color: #c291e2;
     color: #38015c;
   }
-
+/*
   .right {
     position: absolute;
     right: 0px;
     width: 300px;
     padding: 10px;
-  }
+  } */

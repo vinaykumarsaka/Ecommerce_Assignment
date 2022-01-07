@@ -4,10 +4,10 @@ import MainNavigation from './MainNavigation';
 
 const Layout = (props) => {
   return (
-    <Fragment>
-      <MainNavigation />
-      <main>{props.children}</main>
-    </Fragment>
+    <div>
+        <MainNavigation />
+        <main>{props.children}</main>
+    </div>
   );
 };
 

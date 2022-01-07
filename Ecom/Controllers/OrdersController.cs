@@ -54,7 +54,7 @@ namespace Ecom.Controllers
         [HttpPost]
         [Route("add")]
         [Authorize]
-        public IActionResult AddProduct([FromBody] CreateOrderParams order)
+        public async Task<IActionResult> PlaceOrder([FromBody] CreateOrderParams order)
         {
             //int userId = Convert.ToInt32(User.Identity.Name.ToString());
             ClaimsPrincipal currentUser = this.User;
@@ -65,7 +65,7 @@ namespace Ecom.Controllers
             }
 
             order.UserId = currentUserID;
-            ordersService.CreateOrder(order);
+            await ordersService.CreateOrder(order);
             return Ok(new { message = "Product Added successfully" });
         }
 

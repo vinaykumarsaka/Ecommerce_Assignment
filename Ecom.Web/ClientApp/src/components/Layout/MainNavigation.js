@@ -16,13 +16,13 @@ const MainNavigation = () => {
         <header className={classes.header}>
             <nav>
             {account &&<ul>
-                    <li>
+                    <li className="text-right">
                         <button onClick={logoutHandler} >Logout</button>
                     </li>
-                    <li className="float-end">
+                    <li className="text-right">
                         <button onClick={()=>{ navigate('/products')}}> Products</button>
                     </li>
-                    <li className="float-end">
+                    <li className="text-right">
                         <button onClick={()=>{ navigate('/cart')}}> Cart </button>
                     </li>
                 </ul>}

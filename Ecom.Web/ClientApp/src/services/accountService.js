@@ -11,6 +11,7 @@ export async function login(loginModelParams)
 
 export async function signUp(signUpParams)
 {
+    debugger;
     return await axios.post(`${baseUrl}/account/register`,signUpParams);
 }
 

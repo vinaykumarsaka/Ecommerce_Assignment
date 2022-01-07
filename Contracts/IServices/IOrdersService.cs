@@ -9,7 +9,7 @@ namespace Contracts.IServices
 {
     public interface IOrdersService
     {
-        void CreateOrder(CreateOrderParams order);
+        Task CreateOrder(CreateOrderParams order);
         Task<List<Orders>> GetAllOrders(string val);
     }
 }

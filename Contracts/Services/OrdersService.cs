@@ -20,7 +20,7 @@ namespace Contracts.Services
             this._repoWrapper = _repoWrapper;
         }
 
-        public void CreateOrder(CreateOrderParams order)
+        public async Task CreateOrder(CreateOrderParams order)
         {
             Orders newOrder = new Orders
             {
@@ -37,6 +37,10 @@ namespace Contracts.Services
             {
                 item.OrderID = newOrder.Id;
                 _repoWrapper.CartItems.Create(item);
+                _repoWrapper.Save();
+                var product =await _repoWrapper.Products.FindByCondition(x => x.Id == item.ProductId).FirstOrDefaultAsync();
+                product.Quantity = (int)(product.Quantity - item.quantity);
+                _repoWrapper.Products.Update(product);
                 _repoWrapper.Save();
             }
             //foreach()

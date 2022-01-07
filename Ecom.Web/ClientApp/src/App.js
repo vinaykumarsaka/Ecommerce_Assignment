@@ -11,7 +11,7 @@ import ProductList from './components/Product/ProductList'
 import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 function App() {
   return (
-    <Fragment>
+    <div>
     <Layout/>
      
         <Routes>
@@ -25,7 +25,7 @@ function App() {
 
         </Routes>
     
-    </Fragment>
+    </div>
   );
 }
 
